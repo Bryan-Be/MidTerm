@@ -1,7 +1,17 @@
 package co.grandcircus;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Book {
+	String fileName = "BookList.txt";
+	Path filePath = Paths.get("resources", fileName);
+	File file = filePath.toFile();
+
+
+	
+	
 	private String title;
 	private String author;
 	private String status;
@@ -12,7 +22,7 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(String author, String title, String status, String checkOut) {
+	public Book(String title, String author, String status, String checkOut) {
 		super();
 		this.title = title;
 		this.author = author;
@@ -21,7 +31,10 @@ public class Book {
 		
 	}
 
-	public String getauthor() {
+	public String getauthor(String author) {
+		
+		BookListEdit.readFromFile(filePath);
+		
 		return author;
 	}
 
@@ -29,7 +42,7 @@ public class Book {
 		this.author = author;
 	}
 
-	public String gettitle() {
+	public String gettitle(String keyTitle) {
 		return title;
 	}
 
