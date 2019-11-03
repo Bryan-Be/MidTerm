@@ -20,8 +20,9 @@ public class LibraryApp {
 		Path filePath = Paths.get("resources", fileName);
 		File file = filePath.toFile();
 		BufferedReader br = null;
-		String title;
-		
+		//String title;
+		//String author;
+		Book book = null;
 		try {
 			br = new BufferedReader(new FileReader(filePath.toFile()));
 		} catch (FileNotFoundException e1) {
@@ -35,15 +36,17 @@ public class LibraryApp {
 			while ((line = br.readLine()) != null){ 
 				String arr[] = line.split(", ");
 				
-				title = arr[0];
+				String title = arr[0];
 				String author = arr[1];
 				String status = arr[2];
 				String checkOut = arr[3];
 				
-				Book book = new Book(title, author, status, checkOut);
+				book = new Book(title, author, status, checkOut);
 				bookList.add(book);
-				//bookList.get(3);
-				book.getauthor("Herman");
+				//if(book.getauthor("Herman") != null) {
+				//	System.out.println(book.getauthor("Herman"));
+				//}
+				
 				lineCounter++;							
 				System.out.println(lineCounter+". "+line);
 			   // bookList.addAll(line);
@@ -117,8 +120,10 @@ public class LibraryApp {
 			}
 
 			else if (userIntInput == 3) {
-				//System.out.println("Search By Keyword in Title: ");
-			//	String keyTitle = scan.nextLine();
+				System.out.println("Search By Keyword in Title: ");
+				String keyTitle = scan.nextLine();
+				
+				
 				
 				//bookList.get(3);
 
