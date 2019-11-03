@@ -31,10 +31,7 @@ public class Book {
 		
 	}
 
-	public String getauthor(String author) {
-		
-		BookListEdit.readFromFile(filePath);
-		
+	public String getauthor() {		
 		return author;
 	}
 
@@ -42,7 +39,7 @@ public class Book {
 		this.author = author;
 	}
 
-	public String gettitle(String keyTitle) {
+	public String gettitle() {
 		return title;
 	}
 

@@ -8,20 +8,31 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class LibraryApp {
+
+	@SuppressWarnings("unlikely-arg-type")
 	public static void main(String[] args) {
-		//StringBuilder sb = new StringBuilder();
-		//String strLine = "";
+		// StringBuilder sb = new StringBuilder();
+		// String strLine = "";
 		ArrayList<Book> bookList = new ArrayList<>();
 		Scanner scan = new Scanner(System.in);
 		String fileName = "BookList.txt";
 		Path filePath = Paths.get("resources", fileName);
 		File file = filePath.toFile();
 		BufferedReader br = null;
-		//String title;
-		//String author;
+
+		String title = null;
+		String author = null;
+		String status = null;
+		String checkOut = null;
+		String arr[] = null;
+
+		// String title;
+		// String author;
 		Book book = null;
 		try {
 			br = new BufferedReader(new FileReader(filePath.toFile()));
@@ -29,37 +40,38 @@ public class LibraryApp {
 			System.out.println("Issue with liBrary app line 27");
 			e1.printStackTrace();
 		}
-		String line ="";
+		String line = "";
 		int lineCounter = 0;
-		
+
 		try {
-			while ((line = br.readLine()) != null){ 
-				String arr[] = line.split(", ");
-				
-				String title = arr[0];
-				String author = arr[1];
-				String status = arr[2];
-				String checkOut = arr[3];
-				
+			while ((line = br.readLine()) != null) {
+				arr = line.split(",");
+
+				title = arr[0];
+				author = arr[1];
+				status = arr[2];
+				checkOut = arr[3];
+
 				book = new Book(title, author, status, checkOut);
 				bookList.add(book);
-				//if(book.getauthor("Herman") != null) {
-				//	System.out.println(book.getauthor("Herman"));
-				//}
-				
-				lineCounter++;							
-				System.out.println(lineCounter+". "+line);
-			   // bookList.addAll(line);
-			    
+
+				// System.out.println(book.getauthor(author).contains("Her"));
+				// if(book.getauthor("Herman") != null) {
+				// System.out.println(book.getauthor("Herman"));
+				// }
+
+				lineCounter++;
+				System.out.println(lineCounter + ". " + line);
+				// bookList.add(book);
+
 			}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-         
-                 
-		//  System.out.println(bookList);
-	    
+
+		System.out.println(bookList.get(2));
+		// System.out.println(bookList);
 
 		boolean userQuit = false;
 		do {
@@ -69,7 +81,8 @@ public class LibraryApp {
 			System.out.println("1. ~Display a list of Books~");
 			System.out.println("2. ~Search Booklist By Author~");
 			System.out.println("3. ~Search Booklist By Title Keyword~");
-			System.out.println("4. ~Check Out Book~");
+			System.out.println("4. ~Search All words of Library~");
+			System.out.println("5. ~Check Out Book~");
 			System.out.println("5. ~Return Checked Out Book~");
 			System.out.println("6. ~Add Book To BookList~");
 			System.out.println("7. ~Quit~");
@@ -77,18 +90,37 @@ public class LibraryApp {
 
 			int userIntInput = Validator.getInt(scan, "", 1, 7);
 			// System.out.println(userIntInput);
-			//ArrayList<Book> bookArr = new ArrayList<>();
+			// ArrayList<Book> bookArr = new ArrayList<>();
 
 			if (userIntInput == 1) {
 
-				BookListEdit.readFromFile(filePath);
-				//for (Book c : bookArr) {
-				//	System.out.println(c);
-				//}
+				int lineCount = 0;
+
+				for (int i = 0; i < bookList.size(); i++) {
+
+					lineCount++;
+					System.out.println(lineCount + ". " + bookList.get(i));
+				}
 
 			} else if (userIntInput == 2) {
-				
-				System.out.println("What author would you like to search for?");
+				System.out.println("Which author are you interested in?");
+				String authorSer = scan.nextLine();
+				for (int i = 0; i < bookList.size(); i++) {
+					if (bookList.get(i).getauthor().contains(authorSer)) {
+						System.out.println(bookList.get(i));
+					}
+
+				}
+			}
+
+			else if (userIntInput == 3) {
+				System.out.println("Search By Keyword in Title: ");
+				String keyTitle = scan.nextLine();
+
+			//	for(int i =0; )
+
+			} else if (userIntInput == 4) {
+				System.out.println("What word are you looking for?");
 				String authorSearch = scan.nextLine();
 				int lineNum = 0;
 
@@ -117,27 +149,6 @@ public class LibraryApp {
 					}
 				}
 
-			}
-
-			else if (userIntInput == 3) {
-				System.out.println("Search By Keyword in Title: ");
-				String keyTitle = scan.nextLine();
-				
-				
-				
-				//bookList.get(3);
-
-				//Book.getauthor(keyTitle);
-			
-				/*
-				 * String[] finalArray = new String[3]; for (int i = 0; i < setArray.length;
-				 * i++) { String arr[] = setArray[i].split(" "); String first = arr[0];
-				 * finalArray[i] = first;
-				 */
-				
-				
-
-			} else if (userIntInput == 4) {
 				// check out book
 
 			} else if (userIntInput == 5) {
@@ -151,9 +162,9 @@ public class LibraryApp {
 				String bookAddAuthor = scan.nextLine();
 				// BigInteger userPopBigInt = BigInteger.valueOf(userPopInput);
 				Book newBook = new Book(bookAdd, bookAddAuthor, "Checked in", "");
-				//bookArr.add(newBook);
+				// bookArr.add(newBook);
 
-				//BookListEdit.writeBooksToFile(filePath, bookArr);
+				// BookListEdit.writeBooksToFile(filePath, bookArr);
 			}
 
 			else {
