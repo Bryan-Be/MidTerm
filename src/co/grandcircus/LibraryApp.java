@@ -8,13 +8,11 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
+
 
 public class LibraryApp {
 
-	@SuppressWarnings("unlikely-arg-type")
 	public static void main(String[] args) {
 		// StringBuilder sb = new StringBuilder();
 		// String strLine = "";
@@ -55,23 +53,13 @@ public class LibraryApp {
 				book = new Book(title, author, status, checkOut);
 				bookList.add(book);
 
-				// System.out.println(book.getauthor(author).contains("Her"));
-				// if(book.getauthor("Herman") != null) {
-				// System.out.println(book.getauthor("Herman"));
-				// }
-
 				lineCounter++;
 				System.out.println(lineCounter + ". " + line);
-				// bookList.add(book);
 
 			}
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
-		System.out.println(bookList.get(2));
-		// System.out.println(bookList);
 
 		boolean userQuit = false;
 		do {
@@ -83,9 +71,9 @@ public class LibraryApp {
 			System.out.println("3. ~Search Booklist By Title Keyword~");
 			System.out.println("4. ~Search All words of Library~");
 			System.out.println("5. ~Check Out Book~");
-			System.out.println("5. ~Return Checked Out Book~");
-			System.out.println("6. ~Add Book To BookList~");
-			System.out.println("7. ~Quit~");
+			System.out.println("6. ~Return Checked Out Book~");
+			System.out.println("7. ~Add Book To BookList~");
+			System.out.println("8. ~Quit~");
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 			int userIntInput = Validator.getInt(scan, "", 1, 7);
@@ -116,12 +104,15 @@ public class LibraryApp {
 			else if (userIntInput == 3) {
 				System.out.println("Search By Keyword in Title: ");
 				String keyTitle = scan.nextLine();
-
-			//	for(int i =0; )
+				for (int i = 0; i < bookList.size(); i++) {
+					if (bookList.get(i).gettitle().contains(keyTitle)) {
+						System.out.println(bookList.get(i));
+					}
+				}
 
 			} else if (userIntInput == 4) {
 				System.out.println("What word are you looking for?");
-				String authorSearch = scan.nextLine();
+				String wordSer = scan.nextLine();
 				int lineNum = 0;
 
 				Scanner scanner = null;
@@ -133,7 +124,7 @@ public class LibraryApp {
 				while (scanner.hasNextLine()) {
 					final String lineFromFile = scanner.nextLine();
 					lineNum++;
-					if (lineFromFile.contains(authorSearch)) {
+					if (lineFromFile.contains(wordSer)) {
 						try {
 							lineNum = lineNum - 1;
 							for (int i = 0; i < lineNum; i++) {
@@ -145,31 +136,45 @@ public class LibraryApp {
 							e.printStackTrace();
 						}
 
-						break;
 					}
 				}
 
-				// check out book
-
 			} else if (userIntInput == 5) {
-				// return checked out book
-
+				System.out.println("Please choose the book number your interested in:");
+				int userInt =  scan.nextInt();
+				userInt = userInt-1;
+				bookList.get(userInt).setStatus("*");
+				System.out.println("When would you like to return the book?");
+				String returnDate = scan.nextLine();
+				bookList.get(userInt).setCheckOut(returnDate);
+				System.out.println(bookList.get(userInt));
+				
+				
+				
 			} else if (userIntInput == 6) {
+				System.out.println("Which book number would you like to return?");
+				int returnInt = scan.nextInt();
+				returnInt = returnInt - 1;
+				//System.out.println("When would you like to return this book?");
+				//String returnValue = scan.nextLine();
+				bookList.get(returnInt).setStatus("");
+				System.out.println(bookList.get(returnInt));
 
+			} else if (userIntInput == 7) {
 				System.out.println("What book do you want to add?");
 				String bookAdd = scan.nextLine();
 				System.out.println("Whose the Author?");
 				String bookAddAuthor = scan.nextLine();
-				// BigInteger userPopBigInt = BigInteger.valueOf(userPopInput);
-				Book newBook = new Book(bookAdd, bookAddAuthor, "Checked in", "");
-				// bookArr.add(newBook);
+				Book newBook = new Book(bookAdd, bookAddAuthor, "Checked in", " Date");
+				bookList.add(newBook);
 
-				// BookListEdit.writeBooksToFile(filePath, bookArr);
+				BookListEdit.writeBooksToFile(filePath, bookList);
 			}
 
 			else {
 				userQuit = true;
 			}
+			scan.close();
 
 		} while (!userQuit);
 		System.out.println("Thank You For Using the Library App. Have a Great Day");
