@@ -1,9 +1,15 @@
-In Search of Lost Time, Marcel Proust, Check-In, Date
-Ulysses, James Joyce, Check-In, Date
-Don Quixote, Miguel de Cervantes, Check-In, Date
-The Great Gatsby, F. Scott Fitzgerald, Check-In, Date
-Moby Dick, Herman Melville, Check-In, Date
-One Hundred Years of Solitude, Gabriel Garcia Marquez, Check-In, Date
-War and Peace, Leo Tolstoy, Check-In, Date
-Hamlet, William Shakespeare, Check-In, Date
-Land of BBQ,Texass,Checked in, Date
+In Search of Lost Time, Marcel Proust,Checked-In, 
+Ulysses, James Joyce,Checked-In, 
+Don Quixote, Miguel de Cervantes,Checked-In, 
+The Great Gatsby, F. Scott Fitzgerald,Checked-In, 
+Moby Dick, Herman Melville,Checked-In, 
+One Hundred Years of Solitude, Gabriel Garcia Marquez,Checked-In, 
+Hamlet, William Shakespeare,Checked-In, 
+Land of BBQ, Texas,Checked-In, 
+War and Peace, Leo Tolstoy,Checked-In, 
+Blood Sweat and tears, Life,Checked-In, 
+Growth and life, Hope,Checked-In, 
+HaveFun, Alien,Checked-In, 
+War and Peace, Leo Tolstoy,Checked-In, 
+Learn Java,Computers,Checked-In, 
+Everything is Steak,Matt,Check-Out,2019-11-18

@@ -16,14 +16,14 @@ public class BookListEdit {
 
 		File file = filePath.toFile();
 
-		try (PrintWriter output = new PrintWriter(new FileOutputStream(file, true));) {
+		try (PrintWriter output = new PrintWriter(new FileOutputStream(file));) {
 
 			for (Book c : book) {
 				output.println(c);
 			}
 			return true;
 		} catch (FileNotFoundException e) {
-			System.out.println("The file >>" + filePath + "<< does not exist.");
+			System.out.println("The file does not exist" + filePath);
 			//e.printStackTrace();
 			return false;
 		}
@@ -53,4 +53,8 @@ public class BookListEdit {
 		}
 		return BookListFile;
 	}
+	
+	
+	
+	
 }
